@@ -5,7 +5,7 @@ import useMenu from "../../../hooks/useMenu";
 
 const Popular = () => {
   const [menu] = useMenu();
-  const popularItems = menu.filter((item) => item.category === "popular");
+  const popular = menu.filter((item) => item.category === "popular");
   // const [menu, setMenu] = useState([]);
   // useEffect(() => {
   //   fetch("menu.json")
@@ -22,7 +22,7 @@ const Popular = () => {
         heading={"FROM OUR MENU"}
       ></SectionTitle>
       <div className="grid md:grid-cols-2 gap-4">
-        {popularItems.map((item) => (
+        {popular.map((item) => (
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
