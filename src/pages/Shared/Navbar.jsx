@@ -5,6 +5,7 @@ const Navbar = () => {
     <>
       <li><Link to="/">Home</Link></li>
       <li><Link to="/menu">Our Menu</Link></li>
+      <li><Link to="/order/salad">Order Food</Link></li>
     </>
   );
   return (
@@ -35,11 +36,9 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <div className="flex flex-col justify-around">
-            <a className="btn btn-ghost font-serif font-bold text-xl">
+            <a className="btn text-yellow-300 btn-ghost font-serif font-bold text-xl">
               Bistro Boss <br /> R e s t a u r e n t
             </a>
-          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
