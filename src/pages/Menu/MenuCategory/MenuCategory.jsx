@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Cover from "../../Shared/Cover";
 import MenuItem from "../../Shared/MenuItem";
-
+import React from "react";
 const MenuCategory = ({ items, title, img }) => {
   return (
     <div className="pt-8">

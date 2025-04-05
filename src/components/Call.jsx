@@ -1,3 +1,4 @@
+import React from "react";
 const Call = () => {
   return (
     <div className="bg-black h-[250px] mb-20">

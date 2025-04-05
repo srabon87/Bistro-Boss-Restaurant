@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
-
+import React from "react";
 const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {

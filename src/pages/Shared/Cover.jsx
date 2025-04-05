@@ -1,5 +1,5 @@
 import { Parallax } from "react-parallax";
-
+import React from "react";
 const Cover = ({ img, title }) => {
   return (
     <Parallax

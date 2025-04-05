@@ -1,5 +1,5 @@
 import bgImage from "../../assets/shop/banner2.jpg";
-
+import React from "react";
 const Boss = () => {
   return (
     <div className="flex justify-center items-center">

@@ -8,7 +8,7 @@ import soupImg from "../../../assets/menu/soup-bg.jpg";
 import useMenu from "../../../hooks/useMenu";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuCategory from "../MenuCategory/MenuCategory";
-
+import React from "react";
 const Menu = () => {
   const [menu] = useMenu();
   const desserts = menu.filter((item) => item.category === "dessert");
