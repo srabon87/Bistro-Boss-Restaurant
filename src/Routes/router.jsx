@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         },      
         {
           path: 'menu',
-          element: <Menu></Menu>,
+          element: <PrivateRoutes><Menu></Menu></PrivateRoutes>,
         },
         {
           path: '/order/:category',

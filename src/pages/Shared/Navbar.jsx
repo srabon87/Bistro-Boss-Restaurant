@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { BsCart3 } from "react-icons/bs";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -34,17 +35,31 @@ const Navbar = () => {
 
   const navOptions = (
     <>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/menu">Our Menu</Link></li>
-      <li><Link to="/order/salad">Order Food</Link></li>
-      <li><Link to="/secret">Secret</Link></li>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/menu">Our Menu</Link>
+      </li>
+      <li>
+        <Link to="/order/salad">Order Food</Link>
+      </li>
+      <li>
+        <Link to="/secret">Secret</Link>
+      </li>
+      <li>
+        <Link to="/">
+          <button className="flex items-center">
+            <BsCart3 className="mr-2"></BsCart3> <div className="badge badge-success badge-outline">+0</div>
+          </button>
+        </Link>
+      </li>
     </>
   );
 
   return (
     <div className="fixed z-10 w-full bg-gray-800 opacity-75 text-white">
       <div className="navbar container mx-auto">
-        
         {/* Navbar Start */}
         <div className="navbar-start">
           {/* Mobile view - Dropdown */}
@@ -86,7 +101,7 @@ const Navbar = () => {
                         className="w-8 h-8 rounded-full border-2 border-yellow-400"
                       />
                     )}
-                    <span className="text-sm">{user.displayName}</span>
+                    {/* <span className="text-sm">{user.displayName}</span> */}
                     <button
                       onClick={handleLogOut}
                       className="btn btn-sm btn-error ml-2"
@@ -115,9 +130,7 @@ const Navbar = () => {
 
         {/* Navbar Center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navOptions}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
 
         {/* Navbar End */}
@@ -125,7 +138,10 @@ const Navbar = () => {
           {user ? (
             <>
               {/* Profile Picture with Tooltip */}
-              <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip={user.displayName}
+              >
                 {user.photoURL ? (
                   <img
                     src={user.photoURL}
@@ -150,11 +166,9 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-
       </div>
     </div>
   );
 };
 
 export default Navbar;
-
