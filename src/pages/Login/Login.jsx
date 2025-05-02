@@ -12,6 +12,8 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/';
+  console.log('state in the location of login page', location.state);
+  
 
   useEffect( () => {
     loadCaptchaEnginge(6);
@@ -82,7 +84,8 @@ const Login = () => {
               <label className="fieldset-label"><LoadCanvasTemplate /></label>
               <input onBlur={handleValidateCaptcha} type="text" name="captcha" className="input" placeholder="type the captcha above" />
               <button>
-                <input disabled={disabled} type="submit" className="btn btn-soft btn-primary mt-4 w-full" value="Login" />
+              {/* TODO: apply disabled for reCaptcha */}
+                <input disabled={false} type="submit" className="btn btn-soft btn-primary mt-4 w-full" value="Login" />
               </button>
             </fieldset>
           </form>
