@@ -3,9 +3,11 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { BsCart3 } from "react-icons/bs";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -50,7 +52,7 @@ const Navbar = () => {
       <li>
         <Link to="/">
           <button className="flex items-center">
-            <BsCart3 className="mr-2"></BsCart3> <div className="badge badge-success badge-outline">+0</div>
+            <BsCart3 className="mr-2"></BsCart3> <div className="badge badge-success font-bold badge-outline">+{cart.length}</div>
           </button>
         </Link>
       </li>
