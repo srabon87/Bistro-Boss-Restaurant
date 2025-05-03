@@ -50,9 +50,9 @@ const Navbar = () => {
         <Link to="/secret">Secret</Link>
       </li>
       <li>
-        <Link to="/">
-          <button className="flex items-center">
-            <BsCart3 className="mr-2"></BsCart3> <div className="badge badge-success font-bold badge-outline">+{cart.length}</div>
+        <Link to="/dashboard/cart">
+          <button className="flex items-center btn btn-outline btn-success">
+            <BsCart3 className="mr-2"></BsCart3> <div className="badge badge-error font-bold badge-outline">+{cart.length}</div>
           </button>
         </Link>
       </li>
