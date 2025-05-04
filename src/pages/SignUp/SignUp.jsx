@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import ig from "../../assets/reservation/ChatGPT Image May 5, 2025, 01_08_42 AM.png";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const {
     register,
@@ -17,43 +21,48 @@ const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
-      .then(() => {
-        console.log('user profilr info updated')
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Created Successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        navigate('/');
-      })
-      .catch((error => console.log(error)))
+        .then(() => {
+          // create user entry in the database.
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added");
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User Created Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
+        })
+        .catch((error) => console.log(error));
     });
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero min-h-screen">
       <Helmet>
         <title>Bistro Boss | Sign Up Page</title>
       </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Sign up now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+          <div className="md:w-[380px] sm:w-[300px]">
+            <img className="rounded-lg sm:h-[470px] lg:h-[540px] shadow-2xl" src={ig} alt="" />
+          </div>
         </div>
         <div className="card text-center bg-base-100 w-full max-w-sm shadow-2xl">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body p-9">
             <fieldset className="fieldset">
               <label className="label">Name</label>
               <input
@@ -117,13 +126,16 @@ const SignUp = () => {
                   number and one special characters
                 </p>
               )}
-              <button className="btn btn-primary mt-4 md:w-80">Sign Up</button>
+              <button className="btn btn-success btn-soft mt-4 md:w-80">
+                Sign Up
+              </button>
             </fieldset>
+            <SocialLogin></SocialLogin>
           </form>
-          <p className="-mt-4 mb-2">
+          <p className="-mt-4 mb-2 p-2">
             <small>
-              Already have an account... 
-              <Link className="link link-success" to="/login">
+              Already have an account...
+              <Link className="link link-info" to="/login">
                 Login
               </Link>
             </small>
