@@ -1,26 +1,36 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SocialLogin = () => {
+  const { googleSignIn } = useAuth();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
-    const { googleSignIn } = useAuth();
-    const navigate = useNavigate();
-
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-        .then(result => {
-            console.log(result.user);
-        });
-        navigate('/');
-    }
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result) => {
+      console.log(result.user);
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+        navigate("/");
+      });
+    });
+  };
 
   return (
     <div>
-        <div className="divider divider-warning">OR</div>
+      <div className="divider divider-warning">OR</div>
       <div>
         {/* Google */}
-        <button onClick={handleGoogleSignIn} className="btn bg-white text-black border-[#e5e5e5] w-full hover:bg-sky-300">
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn bg-white text-black border-[#e5e5e5] w-full hover:bg-sky-300"
+        >
           <svg
             aria-label="Google logo"
             width="16"
@@ -48,7 +58,7 @@ const SocialLogin = () => {
               ></path>
             </g>
           </svg>
-        Google
+          Google
         </button>
       </div>
     </div>

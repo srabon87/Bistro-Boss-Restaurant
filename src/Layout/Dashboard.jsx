@@ -1,12 +1,17 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { FaAd, FaHome, FaList, FaSearch } from "react-icons/fa";
+import { FaAd, FaEnvelope, FaHome, FaList, FaSearch } from "react-icons/fa";
 import { FaCalendar, FaCartShopping } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+
   const [cart] = useCart();
+
+  //TODO: get isAdmin value from the database   
+  const isAdmin = true;
+
   return (
     <div className="flex">
       <Helmet>
@@ -61,6 +66,7 @@ const Dashboard = () => {
               <FaList></FaList> MY BOOKINGS
             </NavLink>
           </li>
+          {/* Shared navlinks */}
           <div className="divider"></div>
           <li>
             <NavLink
@@ -78,6 +84,15 @@ const Dashboard = () => {
             >
               {" "}
               <FaSearch></FaSearch> MENU
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="font-bold hover:bg-sky-600 w-full p-4"
+              to="/contact"
+            >
+              {" "}
+              <FaEnvelope></FaEnvelope> CONTACT
             </NavLink>
           </li>
         </ul>
