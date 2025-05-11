@@ -7,7 +7,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const Cart = () => {
   const [cart, refetch] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-  const axiousSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -19,7 +19,7 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiousSecure.delete(`/carts/${id}`).then((res) => {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
