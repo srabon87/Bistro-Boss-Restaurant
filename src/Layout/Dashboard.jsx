@@ -1,15 +1,25 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { FaAd, FaEnvelope, FaHome, FaList, FaSearch, FaUtensils, FaUsers, FaBook } from "react-icons/fa";
+import {
+  FaAd,
+  FaEnvelope,
+  FaHome,
+  FaList,
+  FaSearch,
+  FaUtensils,
+  FaUsers,
+  FaBook,
+} from "react-icons/fa";
 import { FaCalendar, FaCartShopping } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
 
   //TODO: get isAdmin value from the database
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex">
