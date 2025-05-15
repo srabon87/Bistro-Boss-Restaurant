@@ -46,8 +46,7 @@ const Dashboard = () => {
                   to="/dashboard/addItems"
                 >
                   {" "}
-                  <FaUtensils></FaUtensils>
-                  ADD ITEMS
+                  <FaUtensils></FaUtensils> ADD ITEMS
                 </NavLink>
               </li>
               <li>
