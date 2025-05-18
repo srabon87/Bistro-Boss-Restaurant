@@ -25,14 +25,25 @@ const Order = () => {
         <title>Bistro Boss | Order Foods</title>
       </Helmet>
       <Cover img={orderCover} title="Order Food"></Cover>
-      <Tabs className="mb-10" defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-        <TabList className="font-serif font-bold flex justify-evenly mb-10 mt-8">
+      <Tabs
+        className="mb-10"
+        defaultIndex={tabIndex}
+        onSelect={(index) => setTabIndex(index)}
+      >
+        <TabList className="font-serif font-bold flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 px-4 mb-10 mt-10">
+          <Tab>SALAD</Tab>
+          <Tab>PIZZA</Tab>
+          <Tab>SOUPS</Tab>
+          <Tab>DESSERTS</Tab>
+          <Tab>DRINKS</Tab>
+        </TabList>
+        {/* <TabList className="font-serif mx-auto md:w-9/12 sm:w-1/12 font-bold flex justify-evenly mb-10 mt-10">
           <Tab>SALAD</Tab>
           <Tab>PIZZA</Tab>
           <Tab>SOUPS</Tab>
           <Tab>DESSERTS</Tab>
           <Tab>DIRINKS</Tab>
-        </TabList>
+        </TabList> */}
         <TabPanel>
           {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 items-center">
             {salad.map((item) => (

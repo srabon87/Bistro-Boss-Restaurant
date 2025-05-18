@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem";
 import useMenu from "../../../hooks/useMenu";
@@ -7,15 +6,7 @@ import React from "react";
 const Popular = () => {
   const [menu] = useMenu();
   const popular = menu.filter((item) => item.category === "popular");
-  // const [menu, setMenu] = useState([]);
-  // useEffect(() => {
-  //   fetch("menu.json")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const popularItems = data.filter((item) => item.category === "popular");
-  //       setMenu(popularItems);
-  //     });
-  // }, []);
+
   return (
     <section className="mb-20">
       <SectionTitle
