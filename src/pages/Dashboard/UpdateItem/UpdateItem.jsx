@@ -1,18 +1,22 @@
 import React from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import { useForm } from "react-hook-form";
-import { FaUtensils } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useLoaderData } from "react-router-dom";
+import { FaUtensils } from "react-icons/fa";
+
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-const AddItems = () => {
+
+const UpdateItem = () => {
+  const {name, category, recipe, price, _id} = useLoaderData();
   const { register, handleSubmit, reset } = useForm();
-  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const onSubmit = async (data) => {
     console.log(data);
     // image upload to imgbb and thenget an url
@@ -20,39 +24,40 @@ const AddItems = () => {
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    if(res.data.success){
+    if (res.data.success) {
       // now send ther data menu item data to the server with the image
       const menuItem = {
         name: data.name,
         category: data.category,
         price: parseFloat(data.price),
         recipe: data.recipe,
-        image: res.data.data.display_url
-      }
-      const menuRes = await axiosSecure.post('/menu', menuItem);
+        image: res.data.data.display_url,
+      };
+      const menuRes = await axiosSecure.patch(`/menu/${_id}`, menuItem);
       console.log(menuRes.data);
-      if(menuRes.data.insertedId){
+      if (menuRes.data.insertedId) {
         // show success popup
         reset();
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name} is added to the menu`,
+          title: `${data.name} has been updated successfully`,
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       }
     }
-    console.log( 'with image url', res.data);
+    console.log("with image url", res.data);
   };
+
   return (
     <div>
       <Helmet>
-        <title>Dashboard | Add Items</title>
+        <title>updating items | Dashboard</title>
       </Helmet>
       <SectionTitle
-        heading="📢Add An Item"
-        subHeading="What's New"
+        heading="Update Item"
+        subHeading="Refresh Info"
       ></SectionTitle>
       <div>
         <form
@@ -67,6 +72,7 @@ const AddItems = () => {
               {...register("name", { required: true })}
               className="input w-full"
               placeholder="Recipe Name"
+              defaultValue={name}
             />
           </fieldset>
 
@@ -76,7 +82,7 @@ const AddItems = () => {
               <legend className="fieldset-legend">Category*</legend>
               <select
                 {...register("category", { required: true })}
-                defaultValue="default"
+                defaultValue={category}
                 className="select w-full"
                 placeholder="Category"
               >
@@ -99,6 +105,7 @@ const AddItems = () => {
                 {...register("price", { required: true })}
                 className="input w-full"
                 placeholder="Price"
+                defaultValue={price}
               />
             </fieldset>
           </div>
@@ -110,6 +117,7 @@ const AddItems = () => {
               {...register("recipe", { required: true })}
               className="textarea h-24 w-full"
               placeholder="Bio"
+              defaultValue={recipe}
             ></textarea>
           </fieldset>
 
@@ -122,8 +130,8 @@ const AddItems = () => {
           </div>
 
           <div className="flex justify-center">
-          <button className="btn btn-soft btn-success">
-            Add Item <FaUtensils></FaUtensils>{" "}
+          <button className="btn btn-soft btn-success  flex justify-center">
+            UPDATE MENU ITEM <FaUtensils></FaUtensils>{" "}
           </button>
           </div>
         </form>
@@ -132,4 +140,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default UpdateItem;
