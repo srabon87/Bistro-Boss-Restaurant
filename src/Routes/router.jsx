@@ -16,6 +16,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/Allusers";
 import AddItems from "../pages/Dashboard/AddItems/AddItems";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
+import Payment from "../pages/Dashboard/Payment/Payment";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
         path: 'cart',
         element: <Cart></Cart>,
       },
+      {
+        path: 'payment',
+        element: <Payment></Payment>,
+      },
 
       // admin routes
       {
@@ -66,18 +71,6 @@ export const router = createBrowserRouter([
         path: 'manageItems',
         element: <AdminRoute><ManageItems></ManageItems></AdminRoute>,
       },
-      // {
-      //   path: 'updateItem/:id',
-      //   element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-      //   loader: ({params}) =>{
-      //     const token = localStorage.getItem('access-token'); // token login er por save kora thakar kotha
-      //     return fetch(`http://localhost:5000/menu/${params.id}`, {
-      //       headers: {
-      //         authorization: `Bearer ${token}`,
-      //       },
-      //     });
-      //   },
-      // },
       {
         path: 'updateItem/:id',
         element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
