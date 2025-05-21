@@ -1,7 +1,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
+import React, { useState } from "react";
+import { MdPayment } from "react-icons/md";
 
 const CheckoutForm = () => {
+  const [error, setError] = useState("");
+  const stripe = useStripe();
+  const elements = useElements();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -14,15 +19,23 @@ const CheckoutForm = () => {
     if (card === null) {
       return;
     }
-    // if (!card) {
-    //   return;
-    // }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
+
+    if (error) {
+      console.log("Payment error", error);
+      setError(error.message);
+    } else {
+      console.log("Payment method", paymentMethod);
+      setError('');
+    }
   };
-  const stripe = useStripe();
-  const elements = useElements();
 
   return (
-    <div>
+    <div className="md:w-7/12 mx-auto mt-36 sm:w-7/12">
       <form onSubmit={handleSubmit}>
         <CardElement>
           options=
@@ -41,9 +54,17 @@ const CheckoutForm = () => {
             },
           }}
         </CardElement>
-        <button type="submit" disabled={!stripe} style={{ marginTop: "20px" }}>
-          Pay
-        </button>
+        <div className="flex flex-col items-center justify-center mt-5 mx-auto w-5/12">
+          <button
+            className="btn btn-primary btn-soft w-full"
+            type="submit"
+            disabled={!stripe}
+            style={{ marginTop: "20px" }}
+          >
+            Pay <MdPayment />
+          </button>
+          <p className="text-red-600 mt-5">{error}</p>
+        </div>
       </form>
     </div>
   );
