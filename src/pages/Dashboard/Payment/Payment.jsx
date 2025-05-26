@@ -14,10 +14,12 @@ const Payment = () => {
       <Helmet>
         <title>Payments Getway | Dashboard</title>
       </Helmet>
+      <div className="text-xl w-8/12 mx-auto">
       <SectionTitle
         heading="Payment"
         subHeading="Please Pay To Eat"
       ></SectionTitle>
+      </div>
       <div>
         <Elements stripe={stripePromise}>
           <CheckoutForm></CheckoutForm>

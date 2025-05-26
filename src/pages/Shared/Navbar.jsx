@@ -38,16 +38,16 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/">HOME</Link>
       </li>
       <li>
-        <Link to="/menu">Our Menu</Link>
+        <Link to="/menu">OUR MENU</Link>
       </li>
       <li>
-        <Link to="/order/salad">Order Food</Link>
+        <Link to="/order/salad">ORDER FOOD</Link>
       </li>
       <li>
-        <Link to="/secret">Secret</Link>
+        <Link to="/secret">SECRET</Link>
       </li>
       <li>
         <Link to="/dashboard/cart">
@@ -108,14 +108,14 @@ const Navbar = () => {
                       onClick={handleLogOut}
                       className="btn btn-sm btn-error ml-2"
                     >
-                      Logout
+                      LOGOUT
                     </button>
                   </div>
                 </li>
               ) : (
                 <li>
                   <Link className="btn btn-primary text-white" to="/login">
-                    Login
+                    LOGIN
                   </Link>
                 </li>
               )}
@@ -126,7 +126,7 @@ const Navbar = () => {
             to="/"
             className="btn btn-ghost normal-case text-xl text-yellow-300"
           >
-            Bistro Boss <br /> R e s t a u r a n t
+            BISTRO BOSS <br /> R E S T A U R A N T
           </Link>
         </div>
 
@@ -159,12 +159,12 @@ const Navbar = () => {
                 )}
               </div>
               <button onClick={handleLogOut} className="btn btn-sm btn-error">
-                Logout
+                LOGOUT
               </button>
             </>
           ) : (
             <Link className="btn btn-primary" to="/login">
-              Login
+              LOGIN
             </Link>
           )}
         </div>

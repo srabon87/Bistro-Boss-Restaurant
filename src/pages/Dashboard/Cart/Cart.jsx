@@ -49,7 +49,7 @@ const Cart = () => {
         <table className="table">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="bg-gray-200 rounded-t-2xl">
               <th>#</th>
               <th>Image</th>
               <th>Name</th>
