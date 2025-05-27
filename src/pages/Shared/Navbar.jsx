@@ -4,10 +4,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { BsCart3 } from "react-icons/bs";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -46,13 +48,26 @@ const Navbar = () => {
       <li>
         <Link to="/order/salad">ORDER FOOD</Link>
       </li>
-      <li>
-        <Link to="/secret">SECRET</Link>
-      </li>
+      {/* <li>
+          <Link to="/secret">SECRET</Link>
+        </li> */}
+      {user && isAdmin && (
+        <li>
+          <Link to="/dashboard/adminHome">DASHBOARD</Link>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <Link to="/dashboard/userHome">DASHBOARD</Link>
+        </li>
+      )}
       <li>
         <Link to="/dashboard/cart">
           <button className="flex items-center btn btn-outline btn-success">
-            <BsCart3 className="mr-2"></BsCart3> <div className="badge badge-error font-bold badge-outline">+{cart.length}</div>
+            <BsCart3 className="mr-2"></BsCart3>{" "}
+            <div className="badge badge-error font-bold badge-outline">
+              +{cart.length}
+            </div>
           </button>
         </Link>
       </li>
