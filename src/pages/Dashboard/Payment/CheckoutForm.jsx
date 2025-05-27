@@ -5,8 +5,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { useForm } from "react-hook-form";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -16,7 +16,8 @@ const CheckoutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [cart] = useCart();
+  const navigate = useNavigate();
+  const [cart, refetch] = useCart();
   // const { reset } = useForm;
   // const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   const totalPrice = parseFloat(
@@ -118,6 +119,16 @@ const CheckoutForm = () => {
 
         const res = await axiosSecure.post("/payments", payment);
         console.log("payment save", res.data);
+        refetch();
+        // if(res.data?.paymentResult?.insertedId){
+        //   Swal.fire({
+        //     position: "top-end",
+        //     icon: "success",
+        //     title: "Thank You for giving us taka poisha",
+        //     showConfirmButton: false,
+        //     timer: 1500
+        //   });
+        // }
       }
 
       if (paymentIntent.status === "succeeded") {
@@ -127,9 +138,11 @@ const CheckoutForm = () => {
         Swal.fire({
           icon: "success",
           title: "Payment Successful",
-          text: `Transaction ID: ${paymentIntent.id}`,
+          // text: `Transaction ID: ${paymentIntent.id}`,
+          text: 'Thank You for Submiting Payment',
           confirmButtonColor: "#3085d6",
         });
+        navigate('/dashboard/paymentHistory')
       }
     }
   };
