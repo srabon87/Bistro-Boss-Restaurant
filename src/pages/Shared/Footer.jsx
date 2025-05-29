@@ -10,6 +10,8 @@ const Footer = () => {
             Bistro Boss Resturant Ltd.
             <br />
             Providing reliable tech since 1992
+            <br />
+            Gmail: bistroboss@gmail.com
           </p>
         </aside>
         <nav>

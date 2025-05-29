@@ -58,7 +58,7 @@ const AllUsers = () => {
             refetch();
             Swal.fire({
               title: "Deleted!",
-              text: "Your food has been deleted.",
+              text: "User has been deleted.",
               icon: "success",
             });
           }

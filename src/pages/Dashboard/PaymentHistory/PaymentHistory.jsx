@@ -15,28 +15,34 @@ const PaymentHistory = () => {
   });
 
   return (
-    <div>
-      <h2 className="text-3xl">Total Payments: {payments.length}</h2>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr className="text-bold text-black">
-              <th>#</th>
-              <th>Price</th>
-              <th>Transaction Id</th>
-              <th>Status</th>
-              <th>Date</th>
+    <div className="px-4 sm:px-6 lg:px-8 py-6">
+      <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-center">
+        Total Payments: {payments.length}
+      </h2>
+
+      <div className="overflow-x-auto rounded-lg shadow-md">
+        <table className="min-w-full table-auto border border-gray-200">
+          <thead className="bg-gray-100 text-gray-800 text-sm sm:text-base">
+            <tr>
+              <th className="px-4 py-2 text-left border">#</th>
+              <th className="px-4 py-2 text-left border">Price</th>
+              <th className="px-4 py-2 text-left border">Transaction ID</th>
+              <th className="px-4 py-2 text-left border">Status</th>
+              <th className="px-4 py-2 text-left border">Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-sm sm:text-base">
             {payments.map((payment, index) => (
-              <tr key={payment._id}>
-                <th>.{index + 1}</th>
-                <td>${payment.price}</td>
-                <td>{payment.transactionId}</td>
-                <td className="text-yellow-400">{payment.status}</td>
-                <td>{payment.date}</td>
+              <tr key={payment._id} className="hover:bg-gray-50">
+                <td className="px-4 py-2 border">{index + 1}</td>
+                <td className="px-4 py-2 border">${payment.price}</td>
+                <td className="px-4 py-2 border break-all">
+                  {payment.transactionId}
+                </td>
+                <td className="px-4 py-2 border text-yellow-500">
+                  {payment.status}
+                </td>
+                <td className="px-4 py-2 border">{payment.date}</td>
               </tr>
             ))}
           </tbody>

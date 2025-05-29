@@ -48,9 +48,9 @@ const Navbar = () => {
       <li>
         <Link to="/order/salad">ORDER FOOD</Link>
       </li>
-      {/* <li>
-          <Link to="/secret">SECRET</Link>
-        </li> */}
+      <li>
+        <Link to="/contact">CONTACT US</Link>
+      </li>
       {user && isAdmin && (
         <li>
           <Link to="/dashboard/adminHome">DASHBOARD</Link>
